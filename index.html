@@ -1,46 +1,627 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <title>Truong Trung Tin | Academic Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trương Trung Tín | Academic Portfolio</title>
+  <meta name="description" content="Academic portfolio of Trương Trung Tín — Software Engineering, AI, Multimodal Systems." />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 40px auto;
-      line-height: 1.6;
-      color: #222;
+    :root{
+      --bg: #0b1020;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.08);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --muted2: rgba(255,255,255,0.55);
+      --line: rgba(255,255,255,0.12);
+      --accent: #7aa2ff;
+      --accent2:#9be7ff;
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 18px;
+      --radius2: 14px;
+      --max: 1100px;
     }
-    h1 { color: #003366; }
-    a { color: #0066cc; text-decoration: none; }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(122,162,255,0.25), transparent 60%),
+        radial-gradient(900px 500px at 85% 20%, rgba(155,231,255,0.18), transparent 55%),
+        radial-gradient(900px 600px at 60% 90%, rgba(122,162,255,0.12), transparent 60%),
+        var(--bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      line-height: 1.55;
+    }
+
+    a{ color:var(--accent2); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 28px 18px 60px; }
+
+    /* Top nav */
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,16,32,0.85), rgba(11,16,32,0.35));
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 220px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:99px;
+      background: radial-gradient(circle at 30% 30%, var(--accent2), var(--accent));
+      box-shadow: 0 0 0 6px rgba(122,162,255,0.12);
+    }
+    .brand b{ font-size: 14px; letter-spacing: 0.3px; }
+    .brand span{ font-size: 12px; color: var(--muted2); }
+
+    .nav a.btn{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      text-decoration:none;
+      color: var(--text);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .nav a.btn:hover{ border-color: rgba(155,231,255,0.35); background: rgba(255,255,255,0.07); }
+
+    .menu{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content:flex-end;
+    }
+    .menu a{
+      font-size: 13px;
+      color: var(--muted);
+      padding: 6px 8px;
+      border-radius: 10px;
+    }
+    .menu a:hover{ color: var(--text); background: rgba(255,255,255,0.06); text-decoration:none; }
+
+    /* Hero */
+    .hero{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+    }
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+      .brand{ min-width: unset; }
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-left{ padding: 24px; }
+    .hero-right{ padding: 20px; }
+
+    .kicker{
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      padding: 6px 10px;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      background: rgba(255,255,255,0.04);
+    }
+    .kicker i{
+      width: 6px;height:6px;border-radius:99px;background: var(--accent2);
+      box-shadow: 0 0 0 6px rgba(155,231,255,0.12);
+      display:inline-block;
+    }
+
+    h1{
+      margin: 14px 0 8px;
+      font-size: 40px;
+      line-height: 1.1;
+      letter-spacing: 0.2px;
+    }
+    .subtitle{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 60ch;
+    }
+    .tags{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0 0;
+    }
+    .pill{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .cta{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .cta a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-size: 14px;
+      text-decoration:none;
+      min-width: 160px;
+    }
+    .cta a.primary{
+      background: linear-gradient(90deg, rgba(122,162,255,0.35), rgba(155,231,255,0.25));
+      border-color: rgba(155,231,255,0.35);
+    }
+    .cta a:hover{ background: rgba(255,255,255,0.08); }
+    .cta a.primary:hover{ filter: brightness(1.05); }
+
+    /* Right panel */
+    .mini-title{
+      font-size: 12px;
+      letter-spacing: .12em;
+      color: var(--muted2);
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+    .info{
+      display:grid;
+      gap: 10px;
+    }
+    .info-row{
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+    }
+    .info-row b{ font-size: 13px; color: var(--muted); font-weight: 600; }
+    .info-row span{ font-size: 13px; color: var(--text); text-align:right; }
+
+    /* Sections */
+    section{ margin-top: 18px; }
+    .section-card{ padding: 18px; }
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: 0.2px;
+    }
+    .section-head p{
+      margin:0;
+      color: var(--muted2);
+      font-size: 13px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .item{
+      padding: 14px;
+      border-radius: var(--radius2);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+    }
+    .item h3{
+      margin: 0 0 4px;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+    .meta{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+      color: var(--muted2);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .badge{
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    ul.clean{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    ul.clean li{ margin: 6px 0; }
+
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 900px){
+      .split{ grid-template-columns: 1fr; }
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 22px;
+      padding: 14px 0 0;
+      color: var(--muted2);
+      font-size: 12px;
+      text-align:center;
+    }
+
+    /* Small helper */
+    .muted{ color: var(--muted); }
+    .tiny{ font-size: 12px; color: var(--muted2); }
+    .sep{ height: 1px; background: var(--line); margin: 12px 0; border: 0; }
   </style>
 </head>
 <body>
 
-<h1>Truong Trung Tin</h1>
-<p><strong>PhD Candidate | AI & Multimodal Learning</strong></p>
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <span class="dot"></span>
+        <div>
+          <b>Trương Trung Tín</b><br/>
+          <span>Academic Portfolio</span>
+        </div>
+      </div>
 
-<p>
-📧 Email: your@email.com <br>
-🌐 GitHub: <a href="https://github.com/Kuro2403">github.com/Kuro2403</a>
-</p>
+      <div class="menu">
+        <a href="#about">Giới thiệu</a>
+        <a href="#education">Học vấn</a>
+        <a href="#experience">Kinh nghiệm</a>
+        <a href="#publications">Bài báo</a>
+        <a href="#projects">Dự án</a>
+        <a href="#awards">Giải thưởng</a>
+        <a href="#contact">Liên hệ</a>
+        <a class="btn" href="https://github.com/Kuro2403" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
 
-<h2>Research Interests</h2>
-<ul>
-  <li>Multimodal AI</li>
-  <li>Air Quality (PM2.5)</li>
-  <li>Remote Sensing & Environmental Data</li>
-</ul>
+  <div class="wrap">
 
-<h2>Projects</h2>
-<ul>
-  <li><strong>AI-based PM2.5 Prediction</strong> – Satellite & Meteorological data</li>
-</ul>
+    <!-- HERO -->
+    <div class="hero">
+      <div class="card hero-left">
+        <span class="kicker"><i></i>Software Engineering • AI • Multimodal Systems</span>
 
-<h2>Publications</h2>
-<p>Under preparation / Conference papers</p>
+        <h1>Trương Trung Tín</h1>
+        <p class="subtitle">
+          Thạc sĩ Kỹ thuật Phần mềm. Quan tâm đến hệ thống AI đa phương thức (dữ liệu ảnh + dữ liệu số),
+          bài toán dự báo chuỗi thời gian và ứng dụng AI vào các hệ thống thực tế.
+        </p>
 
+        <div class="tags">
+          <span class="pill">Multimodal AI</span>
+          <span class="pill">Time-series Forecasting</span>
+          <span class="pill">Computer Vision (YOLOv8)</span>
+          <span class="pill">Microservices • Docker</span>
+        </div>
+
+        <div class="cta">
+          <!-- TODO: nếu bạn có file CV PDF public, thay link vào đây -->
+          <a class="primary" href="#publications">Xem Publications</a>
+          <a href="#projects">Xem Projects</a>
+          <a href="https://kuro2403.github.io/truongtrungtin.github.io/" target="_blank" rel="noopener">Portfolio link (hiện tại)</a>
+        </div>
+
+        <hr class="sep" />
+        <p class="tiny">
+          *Nội dung tổng hợp từ CV của bạn (Học vấn, Kinh nghiệm, Bài báo, Giải thưởng, Ngoại ngữ). :contentReference[oaicite:1]{index=1}
+        </p>
+      </div>
+
+      <div class="card hero-right">
+        <p class="mini-title">Thông tin nhanh</p>
+        <div class="info">
+          <div class="info-row"><b>Địa chỉ</b><span>TP.HCM, Lê Trọng Tấn, Tây Thạnh, Việt Nam</span></div>
+          <div class="info-row"><b>Điện thoại</b><span>(+84) 83 885 9777</span></div>
+          <div class="info-row"><b>Email</b><span><a href="mailto:tntrngtrung@gmail.com">tntrngtrung@gmail.com</a></span></div>
+          <div class="info-row"><b>LinkedIn</b><span><a href="https://www.linkedin.com/in/tín-trương-trung-512b4a292" target="_blank" rel="noopener">linkedin.com/in/…</a></span></div>
+          <div class="info-row"><b>ORCID</b><span><a href="https://orcid.org/0009-0005-7118-3769" target="_blank" rel="noopener">0009-0005-7118-3769</a></span></div>
+          <div class="info-row"><b>GitHub</b><span><a href="https://github.com/Kuro2403" target="_blank" rel="noopener">github.com/Kuro2403</a></span></div>
+          <div class="info-row"><b>English</b><span>VSTEP B2 • APTIS SOL B2</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" class="card section-card">
+      <div class="section-head">
+        <h2>Giới thiệu</h2>
+        <p>Tóm tắt hồ sơ học thuật & kỹ thuật</p>
+      </div>
+
+      <div class="grid">
+        <div class="item">
+          <h3>Profile</h3>
+          <ul class="clean">
+            <li>Thạc sĩ Kỹ thuật Phần mềm (FSB HCM), nền tảng Python, huấn luyện AI và khoa học dữ liệu. :contentReference[oaicite:2]{index=2}</li>
+            <li>Quan tâm đến hệ thống AI “end-to-end” có thể triển khai: dữ liệu thời gian thực, microservices, Docker.</li>
+            <li>Ưu tiên mô tả dự án rõ ràng: bài toán → dữ liệu → mô hình → triển khai → đánh giá.</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <h3>Highlights</h3>
+          <ul class="clean">
+            <li>Bài báo hội nghị: hệ thống AI dự đoán xu hướng crypto (RIVF 2025 – accepted). :contentReference[oaicite:3]{index=3}</li>
+            <li>Bài báo ACM: phát hiện mụn/da liễu dùng YOLOv8 (ICIIT 2024). :contentReference[oaicite:4]{index=4}</li>
+            <li>Kinh nghiệm FPT Software: xử lý ảnh MRI, mô phỏng máy MRI, công cụ nội bộ bằng Excel/VB, JIRA. :contentReference[oaicite:5]{index=5}</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="card section-card">
+      <div class="section-head">
+        <h2>Học vấn</h2>
+        <p>Đào tạo chính quy</p>
+      </div>
+
+      <div class="grid">
+        <div class="item">
+          <h3>Thạc sĩ Kỹ thuật phần mềm</h3>
+          <div class="meta">
+            <span class="badge">FSB HCM</span>
+            <span>03/2024 – 08/2025</span>
+            <span class="badge">GPA: 8/10</span>
+          </div>
+          <ul class="clean">
+            <li>Kiến thức nền Python, huấn luyện AI, khoa học dữ liệu.</li>
+            <li>Hướng thực hành: kỹ thuật + ứng dụng thực tế. :contentReference[oaicite:6]{index=6}</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <h3>Cử nhân Kỹ thuật phần mềm</h3>
+          <div class="meta">
+            <span class="badge">FPT University Cần Thơ</span>
+            <span>09/2019 – 11/2023</span>
+            <span class="badge">GPA: 7.11/10</span>
+          </div>
+          <ul class="clean">
+            <li>Nền tảng kỹ thuật phần mềm, triển khai ứng dụng đa nền tảng.</li>
+            <li>Định hướng phát triển sản phẩm có tích hợp AI. :contentReference[oaicite:7]{index=7}</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="card section-card">
+      <div class="section-head">
+        <h2>Kinh nghiệm làm việc</h2>
+        <p>Industry / Internship</p>
+      </div>
+
+      <div class="item">
+        <h3>FPT Software — Lập trình viên (Sinh viên năm 3)</h3>
+        <div class="meta">
+          <span class="badge">TP.HCM, Việt Nam</span>
+          <span>06/2022 – 08/2022</span>
+          <span class="badge">JIRA</span>
+        </div>
+        <ul class="clean">
+          <li>Xử lý ảnh chụp MRI, mô phỏng lại máy chụp MRI.</li>
+          <li>Lập trình Visual Basic, chỉnh sửa giao diện máy MRI.</li>
+          <li>Tạo tool Excel hỗ trợ công việc nội bộ: tự động lọc tên ảnh, tự động lọc nhãn ảnh.</li>
+          <li>Sửa lỗi theo báo cáo khách hàng. :contentReference[oaicite:8]{index=8}</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications" class="card section-card">
+      <div class="section-head">
+        <h2>Bài báo khoa học</h2>
+        <p>Publications & Proceedings</p>
+      </div>
+
+      <div class="grid">
+        <div class="item">
+          <h3>Hệ thống AI dự đoán tiền ảo Bitcoin bằng mô hình đa phương thức (ảnh + số)</h3>
+          <div class="meta">
+            <span class="badge">RIVF 2025</span>
+            <span>Accepted • ID: 1571201177</span>
+          </div>
+          <ul class="clean">
+            <li>Hệ thống giám sát, phân tích và dự đoán xu hướng crypto theo thời gian thực.</li>
+            <li>Tích hợp Binance WebSocket; pipeline tự động theo kiến trúc microservices, Docker hóa. :contentReference[oaicite:9]{index=9}</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <h3>Áp dụng AI phát hiện mụn trên da mặt bằng YOLOv8</h3>
+          <div class="meta">
+            <span class="badge">ICIIT 2024</span>
+            <span class="badge">ACM DL</span>
+            <span><a href="https://dl.acm.org/doi/10.1145/3654522.3654526" target="_blank" rel="noopener">DOI: 10.1145/3654522.3654526</a></span>
+          </div>
+          <ul class="clean">
+            <li>Ứng dụng đa nền tảng (mobile + web) hỗ trợ quản lý phòng khám, đặt lịch & kiểm tra da liễu bằng AI.</li>
+            <li>Mô hình: YOLOv8. :contentReference[oaicite:10]{index=10}</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="card section-card">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <p>Gợi ý bố cục trình bày (bạn có thể thay nội dung sau)</p>
+      </div>
+
+      <div class="grid">
+        <div class="item">
+          <h3>Multimodal Crypto Trend Forecasting (RIVF 2025)</h3>
+          <div class="meta">
+            <span class="badge">Real-time</span>
+            <span class="badge">WebSocket</span>
+            <span class="badge">Microservices</span>
+            <span class="badge">Docker</span>
+          </div>
+          <ul class="clean">
+            <li><b>Problem:</b> dự báo xu hướng crypto theo thời gian thực.</li>
+            <li><b>Data:</b> Binance WebSocket + (ảnh/biểu đồ) + dữ liệu số.</li>
+            <li><b>System:</b> pipeline tự động, deploy dạng service.</li>
+            <li><b>Next:</b> thêm link repo/demo (nếu public).</li>
+          </ul>
+          <!-- TODO: thay link repo thật nếu có -->
+          <p class="tiny">Repo: <span class="muted">chưa public / sẽ cập nhật</span></p>
+        </div>
+
+        <div class="item">
+          <h3>Acne Detection with YOLOv8 (ICIIT 2024)</h3>
+          <div class="meta">
+            <span class="badge">Computer Vision</span>
+            <span class="badge">YOLOv8</span>
+            <span class="badge">Mobile + Web</span>
+          </div>
+          <ul class="clean">
+            <li><b>Problem:</b> hỗ trợ kiểm tra mụn/da liễu.</li>
+            <li><b>Product:</b> quản lý phòng khám + đặt lịch + AI detection.</li>
+            <li><b>Output:</b> kết quả nhận diện, hỗ trợ quy trình khám.</li>
+          </ul>
+          <p class="tiny">Paper: <a href="https://dl.acm.org/doi/10.1145/3654522.3654526" target="_blank" rel="noopener">ACM Digital Library</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AWARDS & SKILLS -->
+    <section id="awards" class="card section-card">
+      <div class="section-head">
+        <h2>Giải thưởng & Kỹ năng</h2>
+        <p>Awards • Skills • Tools</p>
+      </div>
+
+      <div class="split">
+        <div class="item">
+          <h3>Giải thưởng</h3>
+          <ul class="clean">
+            <li>Giải 3, cuộc thi “IKhien”, Tập đoàn FPT, 2023. :contentReference[oaicite:11]{index=11}</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <h3>Ngoại ngữ</h3>
+          <ul class="clean">
+            <li>English: VSTEP B2</li>
+            <li>APTIS SOL B2 :contentReference[oaicite:12]{index=12}</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <h3>Kỹ năng (đề xuất)</h3>
+          <ul class="clean">
+            <li>Python • Data/ML workflow</li>
+            <li>Computer Vision (YOLO family)</li>
+            <li>Docker • Microservices</li>
+            <li>JIRA • Team workflow</li>
+          </ul>
+          <p class="tiny muted">*Bạn có thể chỉnh lại cho sát thực tế nhất.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="card section-card">
+      <div class="section-head">
+        <h2>Liên hệ</h2>
+        <p>Open to: Research collaboration • Internship • RA positions</p>
+      </div>
+
+      <div class="grid">
+        <div class="item">
+          <h3>Contact</h3>
+          <ul class="clean">
+            <li>Email: <a href="mailto:tntrngtrung@gmail.com">tntrngtrung@gmail.com</a></li>
+            <li>LinkedIn: <a href="https://www.linkedin.com/in/tín-trương-trung-512b4a292" target="_blank" rel="noopener">Profile</a></li>
+            <li>ORCID: <a href="https://orcid.org/0009-0005-7118-3769" target="_blank" rel="noopener">0009-0005-7118-3769</a></li>
+            <li>GitHub: <a href="https://github.com/Kuro2403" target="_blank" rel="noopener">github.com/Kuro2403</a></li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <h3>Quick message (copy)</h3>
+          <p class="muted" style="margin:0;">
+            Hi, I’m Trương Trung Tín. I’m interested in research collaborations on multimodal AI systems and time-series forecasting.
+            Here is my portfolio and publications. Looking forward to connecting.
+          </p>
+          <hr class="sep" />
+          <p class="tiny">
+            Tip: Khi gửi email ứng tuyển, hãy đính kèm 1 link GitHub + 1 link portfolio + 1 link paper (ACM/DOI).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="y"></span> Truong Trung Tin • Built with HTML/CSS • Hosted on GitHub Pages
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-
